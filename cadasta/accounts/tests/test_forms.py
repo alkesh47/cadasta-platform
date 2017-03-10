@@ -30,19 +30,6 @@ class RegisterFormTest(UserTestCase, TestCase):
         user = User.objects.first()
         assert user.check_password('iloveyoko79!') is True
 
-    def test_passwords_do_not_match(self):
-        data = {
-            'username': 'imagine71',
-            'email': 'john@beatles.uk',
-            'password1': 'Iloveyoko79!',
-            'full_name': 'John Lennon',
-        }
-        form = forms.RegisterForm(data)
-
-        assert form.is_valid() is False
-        assert _("Passwords do not match") in form.errors.get('password1')
-        assert User.objects.count() == 0
-
     def test_password_contains_username(self):
         data = {
             'username': 'imagine71',
@@ -271,7 +258,6 @@ class ChangePasswordFormTest(UserTestCase, TestCase):
         assert User.objects.count() == 1
 
         assert user.check_password('iloveyoko79!') is True
-
 
     def test_password_contains_username(self):
         user = UserFactory.create(
