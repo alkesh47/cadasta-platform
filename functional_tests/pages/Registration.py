@@ -33,9 +33,6 @@ class RegistrationPage(Page):
     def get_password_input(self):
         return self.get_form_field("input[@name='password1']")
 
-    def get_password_repeat_input(self):
-        return self.get_form_field("input[@name='password2']")
-
     def get_full_name_input(self):
         return self.get_form_field("input[@name='full_name']")
 
@@ -47,7 +44,6 @@ class RegistrationPage(Page):
             'username':   self.get_username_input(),
             'email':      self.get_email_input(),
             'password1':  self.get_password_input(),
-            'password2':  self.get_password_repeat_input(),
             'full_name': self.get_full_name_input(),
             'register':   self.get_register_button()
         }

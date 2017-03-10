@@ -19,7 +19,6 @@ class RegisterFormTest(UserTestCase, TestCase):
             'username': 'imagine71',
             'email': 'john@beatles.uk',
             'password1': 'iloveyoko79!',
-            'password2': 'iloveyoko79!',
             'full_name': 'John Lennon',
         }
         form = forms.RegisterForm(data)
@@ -36,7 +35,6 @@ class RegisterFormTest(UserTestCase, TestCase):
             'username': 'imagine71',
             'email': 'john@beatles.uk',
             'password1': 'Iloveyoko79!',
-            'password2': 'Iloveyoko68!',
             'full_name': 'John Lennon',
         }
         form = forms.RegisterForm(data)
@@ -50,7 +48,6 @@ class RegisterFormTest(UserTestCase, TestCase):
             'username': 'imagine71',
             'email': 'john@beatles.uk',
             'password1': 'Letsimagine71things?',
-            'password2': 'Letsimagine71things?',
             'full_name': 'John Lennon',
         }
         form = forms.RegisterForm(data)
@@ -65,7 +62,6 @@ class RegisterFormTest(UserTestCase, TestCase):
             'username': '',
             'email': 'john@beatles.uk',
             'password1': 'Letsimagine71things?',
-            'password2': 'Letsimagine71things?',
             'full_name': 'John Lennon',
         }
         form = forms.RegisterForm(data)
@@ -79,7 +75,6 @@ class RegisterFormTest(UserTestCase, TestCase):
             'username': 'imagine71',
             'email': 'john@beatles.uk',
             'password1': 'Isjohnreallythebest34?',
-            'password2': 'Isjohnreallythebest34?',
             'full_name': 'John Lennon',
         }
         form = forms.RegisterForm(data)
@@ -94,7 +89,6 @@ class RegisterFormTest(UserTestCase, TestCase):
             'username': 'imagine71',
             'email': '',
             'password1': 'Isjohnreallythebest34?',
-            'password2': 'Isjohnreallythebest34?',
             'full_name': 'John Lennon',
         }
         form = forms.RegisterForm(data)
@@ -108,7 +102,6 @@ class RegisterFormTest(UserTestCase, TestCase):
             'username': 'imagine71',
             'email': 'john@beatles.uk',
             'password1': '<3yoko',
-            'password2': '<3yoko',
             'full_name': 'John Lennon',
         }
         form = forms.RegisterForm(data)
@@ -124,7 +117,6 @@ class RegisterFormTest(UserTestCase, TestCase):
             'username': 'imagine71',
             'email': 'john@beatles.uk',
             'password1': 'yokoisjustthebest',
-            'password2': 'yokoisjustthebest',
             'full_name': 'John Lennon',
         }
         form = forms.RegisterForm(data)
@@ -141,7 +133,6 @@ class RegisterFormTest(UserTestCase, TestCase):
             'username': 'imagine71',
             'email': 'john@beatles.uk',
             'password1': 'YOKOISJUSTTHEBEST',
-            'password2': 'YOKOISJUSTTHEBEST',
             'full_name': 'John Lennon',
         }
         form = forms.RegisterForm(data)
@@ -160,7 +151,6 @@ class RegisterFormTest(UserTestCase, TestCase):
             'username': 'imagine71',
             'email': 'john@beatles.uk',
             'password1': 'iloveyoko79',
-            'password2': 'iloveyoko79',
             'full_name': 'John Lennon',
         }
         form = forms.RegisterForm(data)
@@ -176,7 +166,6 @@ class RegisterFormTest(UserTestCase, TestCase):
             'username': random.choice(invalid_usernames),
             'email': 'john@beatles.uk',
             'password1': 'Iloveyoko68!',
-            'password2': 'Iloveyoko68!',
             'full_name': 'John Lennon',
         }
         form = forms.RegisterForm(data)
@@ -273,7 +262,6 @@ class ChangePasswordFormTest(UserTestCase, TestCase):
         data = {
             'oldpassword': 'beatles4Lyfe!',
             'password1': 'iloveyoko79!',
-            'password2': 'iloveyoko79!',
         }
 
         form = forms.ChangePasswordForm(user, data)
@@ -284,19 +272,6 @@ class ChangePasswordFormTest(UserTestCase, TestCase):
 
         assert user.check_password('iloveyoko79!') is True
 
-    def test_passwords_do_not_match(self):
-        user = UserFactory.create(password='beatles4Lyfe!')
-
-        data = {
-            'oldpassword': 'beatles4Lyfe!',
-            'password1': 'Iloveyoko79!',
-            'password2': 'Iloveyoko68!',
-        }
-        form = forms.ChangePasswordForm(user, data)
-
-        assert form.is_valid() is False
-        assert (_('You must type the same password each time.') in
-                form.errors.get('password2'))
 
     def test_password_contains_username(self):
         user = UserFactory.create(
@@ -305,7 +280,6 @@ class ChangePasswordFormTest(UserTestCase, TestCase):
         data = {
             'oldpassword': 'beatles4Lyfe!',
             'password1': 'Letsimagine71?',
-            'password2': 'Letsimagine71?',
         }
         form = forms.ChangePasswordForm(user, data)
 
@@ -320,7 +294,6 @@ class ChangePasswordFormTest(UserTestCase, TestCase):
         data = {
             'oldpassword': 'beatles4Lyfe!',
             'password1': 'Isjohnreallythebest34?',
-            'password2': 'Isjohnreallythebest34?',
         }
         form = forms.ChangePasswordForm(user, data)
 
@@ -334,7 +307,6 @@ class ChangePasswordFormTest(UserTestCase, TestCase):
         data = {
             'oldpassword': 'beatles4Lyfe!',
             'password1': '<3yoko',
-            'password2': '<3yoko',
         }
         form = forms.ChangePasswordForm(user, data)
 
@@ -349,7 +321,6 @@ class ChangePasswordFormTest(UserTestCase, TestCase):
         data = {
             'oldpassword': 'beatles4Lyfe!',
             'password1': 'YOKOISJUSTTHEBEST',
-            'password2': 'YOKOISJUSTTHEBEST',
         }
         form = forms.ChangePasswordForm(user, data)
 
@@ -365,7 +336,6 @@ class ChangePasswordFormTest(UserTestCase, TestCase):
         data = {
             'oldpassword': 'beatles4Lyfe!',
             'password1': 'iloveyoko79!',
-            'password2': 'iloveyoko79!',
         }
         form = forms.ChangePasswordForm(user, data)
 
@@ -380,7 +350,6 @@ class ResetPasswordFormTest(UserTestCase, TestCase):
 
         data = {
             'password1': 'iloveyoko79!',
-            'password2': 'iloveyoko79!',
         }
 
         form = forms.ResetPasswordKeyForm(data, user=user)
@@ -392,26 +361,12 @@ class ResetPasswordFormTest(UserTestCase, TestCase):
 
         assert user.check_password('iloveyoko79!') is True
 
-    def test_passwords_do_not_match(self):
-        user = UserFactory.create(password='beatles4Lyfe!')
-
-        data = {
-            'password1': 'Iloveyoko79!',
-            'password2': 'Iloveyoko68!',
-        }
-        form = forms.ResetPasswordKeyForm(data, user=user)
-
-        assert form.is_valid() is False
-        assert (_('You must type the same password each time.') in
-                form.errors.get('password2'))
-
     def test_password_contains_username(self):
         user = UserFactory.create(
             password='beatles4Lyfe!', username='imagine71')
 
         data = {
             'password1': 'Letsimagine71?',
-            'password2': 'Letsimagine71?',
         }
         form = forms.ResetPasswordKeyForm(data, user=user)
 
@@ -425,7 +380,6 @@ class ResetPasswordFormTest(UserTestCase, TestCase):
 
         data = {
             'password1': 'Isjohnreallythebest34?',
-            'password2': 'Isjohnreallythebest34?',
         }
         form = forms.ResetPasswordKeyForm(data, user=user)
 
@@ -438,7 +392,6 @@ class ResetPasswordFormTest(UserTestCase, TestCase):
 
         data = {
             'password1': '<3yoko',
-            'password2': '<3yoko',
         }
         form = forms.ResetPasswordKeyForm(data, user=user)
 
@@ -452,7 +405,6 @@ class ResetPasswordFormTest(UserTestCase, TestCase):
 
         data = {
             'password1': 'YOKOISJUSTTHEBEST',
-            'password2': 'YOKOISJUSTTHEBEST',
         }
         form = forms.ResetPasswordKeyForm(data, user=user)
 
@@ -467,7 +419,6 @@ class ResetPasswordFormTest(UserTestCase, TestCase):
         user = UserFactory.create(password='beatles4Lyfe!', change_pw=False)
         data = {
             'password1': 'iloveyoko79!',
-            'password2': 'iloveyoko79!',
         }
         form = forms.ResetPasswordKeyForm(data, user=user)
 

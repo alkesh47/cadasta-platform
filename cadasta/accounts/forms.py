@@ -13,12 +13,11 @@ from parsley.decorators import parsleyfy
 class RegisterForm(forms.ModelForm):
     email = forms.EmailField(required=True)
     password1 = forms.CharField(widget=forms.PasswordInput())
-    password2 = forms.CharField(widget=forms.PasswordInput())
     MIN_LENGTH = 10
 
     class Meta:
         model = User
-        fields = ['username', 'email', 'password1', 'password2',
+        fields = ['username', 'email', 'password1',
                   'full_name']
 
     def clean_username(self):
@@ -32,9 +31,6 @@ class RegisterForm(forms.ModelForm):
         password = self.data.get('password1')
         validate_password(password)
         errors = []
-
-        if password != self.data.get('password2'):
-            raise forms.ValidationError(_("Passwords do not match"))
 
         email = self.data.get('email').lower().split('@')
         if len(email[0]) and email[0] in password:
